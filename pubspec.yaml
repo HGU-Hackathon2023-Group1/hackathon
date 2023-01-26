@@ -41,14 +41,11 @@ dependencies:
   google_sign_in: ^5.4.3
   provider: ^6.0.5
   cloud_firestore: ^4.3.1
-<<<<<<< HEAD
   firebase_storage: ^11.0.10
   image_picker: ^0.8.6+1
   permission_handler: ^10.2.0
-=======
   lottie: ^2.2.0
   onboarding_intro_screen: ^0.0.8
->>>>>>> 4d22f05ef045d772ed124b1b3229daad82f9b379
 
 dev_dependencies:
   flutter_test:
