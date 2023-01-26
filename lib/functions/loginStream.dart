@@ -3,13 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:hackathon/pages/onBoardingPage.dart';
 import 'package:provider/provider.dart';
 
 import '../pages/homePage.dart';
 import '../pages/loginPage.dart';
 import '../provider/userProvider.dart';
-
-
 
 class LoginStream {
   handleAuthState() {
@@ -17,10 +16,9 @@ class LoginStream {
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (BuildContext context, snapshot) {
         if (snapshot.hasData) {
-
           return const HomePage();
         } else {
-          return const LoginPage();
+          return const OnBoardingPage();
         }
       },
     );
