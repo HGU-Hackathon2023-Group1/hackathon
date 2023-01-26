@@ -12,10 +12,7 @@ class OnBoardingPage extends StatelessWidget {
       body: OnBoardingScreen(
         onSkip: () {
           // TODO : return center login button
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const LoginPage(),),
-          );
+          Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginPage(),),);
         },
         showPrevNextButton: true,
         showIndicator: true,

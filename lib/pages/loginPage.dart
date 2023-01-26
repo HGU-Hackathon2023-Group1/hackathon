@@ -19,7 +19,9 @@ class _LoginPageState extends State<LoginPage> {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (BuildContext context, snapshot) {
           if (snapshot.hasData) {
-            return const HomePage();
+            WidgetsBinding.instance.addPostFrameCallback((_){
+              Navigator.popUntil(context, ModalRoute.withName(Navigator.defaultRouteName));
+            });
           } else {
             return Center(
               child: TextButton(
@@ -30,10 +32,9 @@ class _LoginPageState extends State<LoginPage> {
               ),
             );
           }
+          return const Center(child: CircularProgressIndicator(),);
         },
       ),
-
-      //
     );
   }
 }
