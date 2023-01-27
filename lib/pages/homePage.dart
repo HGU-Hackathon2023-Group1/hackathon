@@ -47,11 +47,8 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.white.withOpacity(0.8),
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.chat_bubble), label: ""),
+          BottomNavigationBarItem(icon: Icon(Icons.chat_bubble), label: ""),
           BottomNavigationBarItem(icon: Icon(Icons.search), label: ""),
-          BottomNavigationBarItem(icon: Icon(Icons.list), label: ""),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: ""),
         ],
       ),
     );
