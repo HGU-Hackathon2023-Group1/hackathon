@@ -8,14 +8,14 @@ Color primaryColor = const Color.fromARGB(255, 83, 184, 138);
 Color accentColor = const Color.fromARGB(255, 199, 176, 121);
 
 // 첫 번째 페이지
-class firstPage extends StatefulWidget {
-  const firstPage({Key? key}) : super(key: key);
+class Sell extends StatefulWidget {
+  const Sell({Key? key}) : super(key: key);
 
   @override
-  State<firstPage> createState() => _firstPageState();
+  State<Sell> createState() => _SellState();
 }
 
-class _firstPageState extends State<firstPage> {
+class _SellState extends State<Sell> {
   // 배경 이미지 URL
   final String backImg = "https://i.ibb.co/2Pz33q7/2021-12-16-12-21-42-cleanup.png";
 

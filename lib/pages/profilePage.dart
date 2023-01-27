@@ -7,14 +7,14 @@ Color primaryColor = const Color.fromARGB(255, 83, 184, 138);
 Color accentColor = const Color.fromARGB(255, 199, 176, 121);
 
 /// 세 번째 페이지
-class thirdPage extends StatefulWidget {
-  const thirdPage({Key? key}) : super(key: key);
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({Key? key}) : super(key: key);
 
   @override
-  State<thirdPage> createState() => _thirdPageState();
+  State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class _thirdPageState extends State<thirdPage> {
+class _ProfilePageState extends State<ProfilePage> {
   /// 전체 메뉴
   final List<Map<String, String>> menu = const [
     {

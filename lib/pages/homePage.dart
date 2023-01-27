@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'thirdPage.dart';
+import 'profilePage.dart';
 import 'secondPage.dart';
-import 'firstPage.dart';
+import 'sell.dart';
 
 /// 메인 색상
 Color primaryColor = const Color.fromARGB(255, 83, 184, 138);
@@ -25,9 +25,9 @@ class _HomePageState extends State<HomePage> {
       body: IndexedStack(
         index: currentIndex, // index 순서에 해당하는 child를 맨 위에 보여줌
         children: const [
-          firstPage(),
+          Sell(),
           secondPage(),
-          thirdPage(),
+          ProfilePage(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
