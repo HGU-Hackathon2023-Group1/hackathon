@@ -43,8 +43,7 @@ class MyApp extends StatelessWidget {
         ),
         backgroundColor: Colors.white,
       ),
-      home: //LoginStream().handleAuthState(),
-      const MyPage(),
+      home: LoginStream().handleAuthState(),
 
       initialRoute: '/',
       routes: {
