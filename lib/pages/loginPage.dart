@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:rive/rive.dart';
+import 'package:sign_in_button/sign_in_button.dart';
 
 import '../functions/loginStream.dart';
 import 'homePage.dart';
@@ -12,6 +14,20 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  late RiveAnimationController _controller;
+
+  void _togglePlay() =>
+      setState(() => _controller.isActive = !_controller.isActive);
+
+  /// Tracks if the animation is playing by whether controller is running
+  bool get isPlaying => _controller.isActive;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = SimpleAnimation('idle');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,11 +40,36 @@ class _LoginPageState extends State<LoginPage> {
             });
           } else {
             return Center(
-              child: TextButton(
-                child: const Text("Google Login"),
-                onPressed: () {
-                  LoginStream().signInWithGoogle();
-                },
+              child: Stack(
+                //mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: 200,
+                        height: 200,
+                        child: RiveAnimation.asset(
+                          'assets/05_eye_rigv02.riv',
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      const SizedBox(height: 50,),
+                      Center(
+                        child: Container(
+                          height: 30,
+                          child: SignInButton(
+                            Buttons.googleDark,
+                            onPressed: () {
+                              LoginStream().signInWithGoogle();
+                            },
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 60,),
+                    ]
+                  ),
+                ],
               ),
             );
           }

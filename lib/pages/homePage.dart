@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../functions/loginStream.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -7,16 +9,13 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("home page")),
-      body: Column(
-        children: [
-          Text("home page"),
-          TextButton(
-            onPressed: (){
-
-            },
-            child: const Text("Add"),
-          )
-        ]
+      body: Center(
+        child: TextButton(
+          child: const Text("Google Logout"),
+          onPressed: () {
+            LoginStream().signOut();
+          },
+        ),
       ),
     );
   }
