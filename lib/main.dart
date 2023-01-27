@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hackathon/pages/addPage.dart';
 import 'package:hackathon/pages/myPage.dart';
+import 'package:hackathon/pages/profilePage.dart';
 import 'package:hackathon/pages/transactionStatus.dart';
 import 'package:hackathon/provider/productProvider.dart';
 import 'package:hackathon/provider/userProvider.dart';
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
         backgroundColor: Colors.white,
       ),
       home: LoginStream().handleAuthState(),
+      // ProfilePage(),
 
       initialRoute: '/',
       routes: {

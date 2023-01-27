@@ -156,7 +156,7 @@ class _MyPageState extends State<MyPage> with TickerProviderStateMixin {
     return Container(
       color: const Color(0xFFB0BEC5),
       height: 2.0,
-      width: 123.0,
+      width: MediaQuery.of(context).size.width * 0.35,
     );
   }
 
