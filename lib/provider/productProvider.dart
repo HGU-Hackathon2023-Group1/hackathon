@@ -55,10 +55,14 @@ class ProductProvider extends ChangeNotifier{
     await desertRef.delete();
   }
 
-  Future<void> addProduct(XFile file, Product product) async{
-    UploadTask? uploadTask = await uploadFile(file);
+  Future<void> addProduct(XFile? file, Product product) async{
+    String? fileUrl = "";
+    if(file != null){
+      UploadTask? uploadTask = await uploadFile(file);
+      fileUrl = await uploadTask?.snapshot.ref.getDownloadURL();
+    }
     await products.doc(product.docId).set(<String, dynamic>{
-      "fileUrl" : uploadTask?.snapshot.ref.getDownloadURL() == null? uploadTask?.snapshot.ref.getDownloadURL().toString() : "-",
+      "fileUrl" : fileUrl,
       "name" : product.name,
       "text" : product.text,
       "category" : product.category,

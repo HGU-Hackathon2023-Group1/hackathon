@@ -1,4 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:hackathon/pages/addPage.dart';
+import 'package:hackathon/provider/productProvider.dart';
 import 'package:hackathon/provider/userProvider.dart';
 import 'package:provider/provider.dart';
 
@@ -16,6 +18,7 @@ Future<void> main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => UserProvider()),
+        ChangeNotifierProvider(create: (_) => ProductProvider()),
       ],
       child: const MyApp(),
     ),
@@ -43,6 +46,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         // '/splash/init': (context) => const InitPage(),
+        '/pages/addPage' : (context) => const AddPage(),
       },
     );
   }
