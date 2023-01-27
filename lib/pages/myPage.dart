@@ -657,7 +657,7 @@ class _MyPageState extends State<MyPage> with TickerProviderStateMixin {
                     ),
                     elevation: 0,
                     scrolledUnderElevation: 5,
-                    backgroundColor: Colors.transparent,
+                    backgroundColor: Colors.white,
                     title: Text(
                       "마이프로필",
                       style: TextStyle(color: _colorTween.value),
