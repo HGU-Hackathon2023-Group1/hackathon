@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'myPage.dart';
 import 'profilePage.dart';
 import 'secondPage.dart';
 import 'sell.dart';
@@ -27,7 +28,7 @@ class _HomePageState extends State<HomePage> {
         children: const [
           Sell(),
           secondPage(),
-          ProfilePage(),
+          MyPage(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -48,6 +49,7 @@ class _HomePageState extends State<HomePage> {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
           BottomNavigationBarItem(icon: Icon(Icons.chat_bubble), label: ""),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: ""),
         ],
       ),
     );

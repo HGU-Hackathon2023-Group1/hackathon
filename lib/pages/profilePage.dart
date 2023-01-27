@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:kpostal/kpostal.dart';
 
-/// 메인 색상
-Color primaryColor = const Color.fromARGB(255, 83, 184, 138);
-
-/// 포인트 색상
-Color accentColor = const Color.fromARGB(255, 199, 176, 121);
-
-/// 세 번째 페이지
+/// 네 번째 페이지
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
@@ -15,129 +10,161 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  /// 전체 메뉴
-  final List<Map<String, String>> menu = const [
-    {
-      "ko": "추천",
-      "en": "Recommend",
-      "imgUrl": "https://i.ibb.co/SwGPpzR/9200000003687-20211118142543832.jpg",
-    },
-    {
-      "ko": "리저브 에스프레소",
-      "en": "Reserve Espresso",
-      "imgUrl": "https://i.ibb.co/JHVXZ72/9200000003690-20211118142702357.jpg",
-    },
-    {
-      "ko": "리저브 드립",
-      "en": "Reserve Drip",
-      "imgUrl": "https://i.ibb.co/M91G17c/9200000003693-20211118142933650.jpg",
-    },
-    {
-      "ko": "콜드브루",
-      "en": "ColdBrew",
-      "imgUrl": "https://i.ibb.co/jyZK4C9/9200000003696-20211118143125337.jpg",
-    },
-  ];
+
+  String postCode = '-';
+  String roadAddress = '-';
+  String jibunAddress = '-';
+  String latitude = '-';
+  String longitude = '-';
+  String kakaoLatitude = '-';
+  String kakaoLongitude = '-';
+
+  String address = '욱수동';
 
   @override
   Widget build(BuildContext context) {
-    /// Tip : TabBar controller를 직접 TabBar에 넣어줄 수도 있고, 아래와 같이 위젯으로 감싸줄 수도 있습니다.
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: const Text(
-            "Order",
-            style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-            ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.lightGreen[300],
+        elevation: 0.5,
+        title: const Text(
+          'Profile Page',
+          style: TextStyle(color: Colors.white),
+        ),
+        automaticallyImplyLeading: false,
+      ),
+      body: SafeArea(
+        /// Tip: 작은 화면에서 넘친다면 스크롤 가능하도록
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 24,
+            vertical: 62,
           ),
-          backgroundColor: Colors.white,
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.search_outlined, color: Colors.grey),
-              onPressed: () {
-                print("Pay 우측 상단 아이콘 클릭 됨");
-              },
-            ),
-          ],
-
-          /// Tip : AppBar 하단에 TabBar를 만들어 줍니다.
-          bottom: TabBar(
-            isScrollable: false,
-            indicatorColor: primaryColor,
-            indicatorWeight: 4,
-            labelColor: Colors.black,
-            unselectedLabelColor: Colors.grey,
-            labelStyle: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
-            tabs: const [
-              Tab(text: "전체 메뉴"),
-              Tab(text: "나만의 메뉴"),
-              Tab(text: "🎂 홀케이크"),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Column(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(25.0),
+                      child: Container(
+                        height: 100,
+                        width: 100,
+                        decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: NetworkImage('https://picsum.photos/id/421/200/200'),
+                            )
+                        ),
+                      ),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.all(1.0),
+                      child: Text(
+                        "Name",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Text(
+                        "googleLogin@google.com",
+                        style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey.withOpacity(0.8)),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              const Text(
+                "My Information",
+                style: TextStyle(
+                  fontWeight: FontWeight.w900,
+                  fontSize: 32,
+                ),
+              ),
+              const SizedBox(height: 16),
+              const Text(
+                "010-7137-9383",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 32),
+              ListTile(
+                onTap: () async {
+                  // kpostal 넣기
+                },
+                contentPadding: const EdgeInsets.all(0),
+                leading: const Icon(Icons.home_outlined, color: Colors.black),
+                title: const Text(
+                  "주소 관리",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Text(
+                  address,
+                  style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey.withOpacity(0.8)),
+                ),
+              ),
+              ListTile(
+                onTap: () => print("결제 수단 관리 클릭 됨"),
+                contentPadding: EdgeInsets.all(0),
+                leading: Icon(Icons.credit_card_outlined, color: Colors.black),
+                title: const Text(
+                  "내 포인트",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              ListTile(
+                onTap: (){
+                  Navigator.pushNamed(context, "/pages/transaction");
+                },
+                contentPadding: EdgeInsets.all(0),
+                leading: const Icon(Icons.volume_mute_outlined, color: Colors.black),
+                title: const Text(
+                  "거래 현황",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              ListTile(
+                onTap: () => print("문의사항 클릭 됨"),
+                contentPadding: const EdgeInsets.all(0),
+                leading: const Icon(Icons.help_outline, color: Colors.black),
+                title: const Text(
+                  "문의사항",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
             ],
           ),
-        ),
-        body: TabBarView(
-          children: [
-            /// 전체 메뉴
-            ListView.builder(
-              itemCount: 100,
-              itemBuilder: (context, index) {
-                final item = menu[index % menu.length];
-                final ko = item["ko"] ?? "제목";
-                final en = item["en"] ?? "title";
-                final imgUrl = item["imgUrl"] ?? "";
-                return Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 16,
-                    horizontal: 21,
-                  ),
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        radius: 52,
-                        // Tip : circleAvatar 배경에 맞춰서 동그랗게 이미지 넣는 방법
-                        backgroundImage: NetworkImage(imgUrl),
-                        backgroundColor: Colors.transparent,
-                      ),
-                      const SizedBox(width: 16),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            ko,
-                            style: const TextStyle(
-                              fontSize: 21,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(height: 6),
-                          Text(
-                            en,
-                            style: const TextStyle(
-                              fontSize: 16,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ),
-
-            /// 나만의 메뉴
-            const Center(child: Text("나만의 메뉴")),
-
-            /// 홀케이크 예약
-            const Center(child: Text("홀케이크 예약")),
-          ],
         ),
       ),
     );

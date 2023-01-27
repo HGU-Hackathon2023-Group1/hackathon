@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hackathon/pages/addPage.dart';
+import 'package:hackathon/pages/myPage.dart';
+import 'package:hackathon/pages/transactionStatus.dart';
 import 'package:hackathon/provider/productProvider.dart';
 import 'package:hackathon/provider/userProvider.dart';
 import 'package:provider/provider.dart';
@@ -41,12 +43,14 @@ class MyApp extends StatelessWidget {
         ),
         backgroundColor: Colors.white,
       ),
-      home: LoginStream().handleAuthState(),
+      home: //LoginStream().handleAuthState(),
+      const MyPage(),
 
       initialRoute: '/',
       routes: {
         // '/splash/init': (context) => const InitPage(),
         '/pages/addPage' : (context) => const AddPage(),
+        '/pages/transaction' : (context) => const TransactionStatus(),
       },
     );
   }
