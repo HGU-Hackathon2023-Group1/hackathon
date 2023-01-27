@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'addPage.dart';
 import 'myPage.dart';
 import 'profilePage.dart';
 import 'secondPage.dart';
@@ -27,7 +28,7 @@ class _HomePageState extends State<HomePage> {
         index: currentIndex, // index 순서에 해당하는 child를 맨 위에 보여줌
         children: const [
           Sell(),
-          secondPage(),
+          AddPage(),
           MyPage(),
         ],
       ),

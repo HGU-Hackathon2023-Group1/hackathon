@@ -90,7 +90,88 @@ class _AddPageState extends State<AddPage> {
           //     child: Icon(Icons.camera_alt),
           //   ),
           // ),
-          const SizedBox(height: 20,),
+          Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20, top: 18,),
+            child: Container(
+              height: 150,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(8)),
+                color: Color(0xffD9D9D9),
+              ),
+              child: InkWell(
+                child: _image!= null?
+                showImage() :
+                const Center(
+                  child: Text('사진 업로드 사이즈만 바꿔서\n그대로 사용하시면 될 것 같습니다.',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                onTap: (){
+                  getImage(ImageSource.gallery);
+                },
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20, top: 30,),
+            child: TextField(
+              controller: _name,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                label: Text(' 브랜드명을 입력해주세요', style: TextStyle(color: Colors.black),),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20, top: 18,),
+            child: TextField(
+              controller: _name,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                label: Text(' 제품명을 입력해주세요', style: TextStyle(color: Colors.black),),
+              ),
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.only(left: 20, right: 20, top: 28,),
+            child: Divider(color: Color(0xffECEFF1), thickness: 1,),
+          ),
+          const Padding(
+            padding: EdgeInsets.only(left: 20, top: 20, bottom: 18,),
+            child: Text('상태', style: TextStyle(color: Colors.black, fontSize: 17,),),
+          ),
+          Container(
+            width: 180,
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(30),),
+            padding: const EdgeInsets.only(left: 20,),
+            child: Ink(
+              width: 10,
+              height: 30,
+              color: Colors.white,
+              child: Row(children: [
+                  OutlinedButton(
+                    onPressed: (){
+                      setState(() {
+                        _selectedLevel[0] = true;
+                        _selectedLevel[1] = false;
+                        _selectedLevel[2] = false;
+                      },);
+                    },
+                    style: OutlinedButton.styleFrom(
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(50))),
+                      backgroundColor: _selectedLevel[0] ? Color(0xffD6EAF8) : Colors.white,
+                    ),
+                    child: Text(level[0], style: TextStyle(color : _selectedLevel[0]? Colors.black : Colors.white,),),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
           const Padding(
             padding: EdgeInsets.only(left: 35, right: 30, top: 20, bottom: 40,),
             child: Text('보내는 상품에 대한 정보를\n적어주세요', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20,),),
@@ -275,24 +356,6 @@ class _AddPageState extends State<AddPage> {
                 ],
             ),
           ),
-
-            Padding(
-              padding: EdgeInsets.only(left: 35, right: 35,),
-              child: Container(
-                height: 300,
-                color: Colors.grey.shade200,
-                child: InkWell(
-                  child: _image!= null?
-                  showImage() :
-                  const Center(
-                    child: Icon(Icons.image, color: Colors.grey, size: 100,),
-                  ),
-                  onTap: (){
-                    getImage(ImageSource.gallery);
-                  },
-                ),
-              ),
-            ),
 
           const Padding(
             padding: EdgeInsets.only(left: 30, right: 30, top: 20, ),
