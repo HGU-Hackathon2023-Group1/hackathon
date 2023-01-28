@@ -193,6 +193,8 @@ class _AddPageState extends State<AddPage> {
                       child: Text(level[2], style: TextStyle(color : _selectedLevel[2]? Colors.white : Colors.black,),),
                     ),
                   ],
+
+
                   ),
                 ),
               ],
@@ -232,10 +234,11 @@ class _AddPageState extends State<AddPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
                     Text('보내기', style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
-                    ),
+                        color: Colors.white,
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                      ),
+
                     ),
                     SizedBox(width: 8,),
                     Icon(Icons.send, color: Colors.white,),
@@ -249,6 +252,7 @@ class _AddPageState extends State<AddPage> {
                 await context.read<ProductProvider>().getProducts(uid);
                 context.read<UserProvider>().setIdx(0);
                 },
+
             ),
           ),
         ],
