@@ -21,6 +21,42 @@ class ProductProvider extends ChangeNotifier{
     storageRef = storage.ref().child("image");
   }
 
+  List<Product> _productList = [];
+
+  List<Product> getProductList(){
+    return _productList;
+  }
+
+  bool _noP = true;
+  bool getNoProduct() => _noP;
+
+  Future<void> getProducts(String uid) async{
+    print(uid);
+    await products.doc(uid).collection("product").get().then((value){
+      if(value.size == 0){
+        _noP = true;
+      }
+      else{
+        _noP = false;
+        List _list = value.docs.map((sd){}).toList();
+        _productList.clear();
+        for(int i = 0 ; i < _list.length ; i++){
+          _productList.add(Product(
+              category: _list[i]["category"],
+              name: _list[i]["name"],
+              productName: _list[i]["productName"],
+              url: _list[i]["fileUrl"],
+              text: _list[i]["text"],
+              address: _list[i]["address"]
+          ));
+        }
+
+      }
+    }
+    );
+    notifyListeners();
+  }
+
   Future<UploadTask?> uploadFile(XFile? file) async {
     if (file == null) {
       return null;
@@ -48,45 +84,27 @@ class ProductProvider extends ChangeNotifier{
     return Future.value(uploadTask);
   }
 
-  Future<void> deleteImage(String name) async {
-    Reference desertRef = storageRef.child(name);
 
-  // Delete the file
-    await desertRef.delete();
-  }
-
-  Future<void> addProduct(XFile? file, Product product) async{
+  Future<void> addProduct(XFile? file, Product product, String uid) async{
     String? fileUrl = "";
     if(file != null){
       UploadTask? uploadTask = await uploadFile(file);
-      fileUrl = await uploadTask?.snapshot.ref.getDownloadURL();
+      io.sleep(const Duration(seconds: 2));
+      fileUrl = await uploadTask!.snapshot.ref.getDownloadURL();
     }
-    await products.doc(product.docId).set(<String, dynamic>{
+    await products.doc(uid).collection("product").doc().set(<String, dynamic>{
       "fileUrl" : fileUrl,
       "name" : product.name,
+      "productName" : product.productName,
       "text" : product.text,
       "category" : product.category,
-      "uid" : product.docId
+      "address" : product.address,
 
     }).then((value){
 
     }).onError((error, stackTrace) => null);
   }
 
-  Future<void> deleteProduct(String docId) async{
-    await products.doc(docId).delete();
-  }
-
-  Future<void> editProduct(String filepath, Product product) async {
-    await products.doc(product.docId).update({
-      "fileUrl" : product.url,
-      "name" : product.name,
-      "text" : product.text,
-      "category" : product.category,
-      "docId" : product.docId,
-      "price" : product.price,
-    });
-  }
 
   Future<void> _downloadFile(Reference ref, BuildContext context) async {
     final io.Directory systemTempDir = io.Directory.systemTemp;
@@ -136,27 +154,21 @@ class ProductProvider extends ChangeNotifier{
   }
 }
 
-enum Category {
-  all,
-  accessories,
-  clothing,
-  home,
-}
 
 class Product {
   const Product({
     required this.category,
     required this.name,
-    required this.price,
+    required this.productName,
     required this.url,
-    required this.docId,
     required this.text,
+    required this.address,
   });
 
-  final Category category;
+  final String category;
   final String name;
-  final int price;
+  final String productName;
   final String url;
-  final String docId;
   final String text;
+  final String address;
 }

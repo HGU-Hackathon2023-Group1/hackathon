@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hackathon/provider/productProvider.dart';
+import 'package:hackathon/provider/userProvider.dart';
+import 'package:provider/provider.dart';
 import 'addPage.dart';
 import 'myPage.dart';
 import 'profilePage.dart';
@@ -21,11 +24,19 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int currentIndex = 0;
 
+  // @override
+  // void initState() async{
+  //   // TODO: implement initState
+  //   // String _uid = await Provider.of<UserProvider>(context, listen: false).getUid();
+  //   // Provider.of<ProductProvider>(context, listen: false).getProducts(_uid);
+  //   super.initState();
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: IndexedStack(
-        index: currentIndex, // index 순서에 해당하는 child를 맨 위에 보여줌
+        index: context.watch<UserProvider>().getIdx(), // index 순서에 해당하는 child를 맨 위에 보여줌
         children: const [
           Sell(),
           AddPage(),

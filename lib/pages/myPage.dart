@@ -1,4 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../provider/productProvider.dart';
 
 class MyPage extends StatefulWidget {
   const MyPage({Key? key}) : super(key: key);
@@ -23,6 +28,7 @@ class _MyPageState extends State<MyPage> with TickerProviderStateMixin {
 
   late AnimationController _colorAnimationController;
   late Animation _colorTween, _iconColorTween, _textColorTween;
+  List<Product> _productList = [];
 
   Widget productCard(
       IconData _icon, String _name, String _brand, String _price, int _state) {
@@ -65,6 +71,7 @@ class _MyPageState extends State<MyPage> with TickerProviderStateMixin {
                       size: 10,
                       color: Color(0xFFCFD8DC),
                     )
+                    // Image.network(src)
                   ],
                 )),
               ],
@@ -215,6 +222,7 @@ class _MyPageState extends State<MyPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final double statusBarHeight = MediaQuery.of(context).padding.top;
+    _productList = context.watch<ProductProvider>().getProductList();
 
     return Scaffold(
         backgroundColor: Colors.white,
@@ -226,7 +234,6 @@ class _MyPageState extends State<MyPage> with TickerProviderStateMixin {
               SingleChildScrollView(
                 child: Column(
                   children: [
-
                     Container(
                       padding: const EdgeInsets.all(20.0),
                       color: Colors.white,
@@ -234,7 +241,7 @@ class _MyPageState extends State<MyPage> with TickerProviderStateMixin {
                       child: Column(
                         children: [
                           const SizedBox(
-                            height: kToolbarHeight,
+                            height: kToolbarHeight + 10,
                           ),
                           Row(
                             children: [
@@ -284,165 +291,6 @@ class _MyPageState extends State<MyPage> with TickerProviderStateMixin {
                             ],
                           ),
                           const SizedBox(height: 15,),
-                          // Container(
-                          //   width: 378,
-                          //   height: 123,
-                          //   decoration: BoxDecoration(
-                          //     //color: Colors.red,
-                          //     borderRadius: BorderRadius.circular(8),
-                          //     border: Border.all(width: 1),
-                          //   ),
-                          //   child: Column(
-                          //     mainAxisAlignment: MainAxisAlignment.center,
-                          //     children: [
-                          //       InkWell(
-                          //           child: Container(
-                          //             height: 68,
-                          //             decoration: BoxDecoration(
-                          //               //color: Colors.yellow,
-                          //               borderRadius: BorderRadius.vertical(
-                          //                 top: Radius.circular(8),
-                          //               ),
-                          //             ),
-                          //             child: Row(
-                          //               mainAxisAlignment: MainAxisAlignment.center,
-                          //               children: [
-                          //                 const SizedBox(width: 18),
-                          //                 Container(
-                          //                   child: Text(
-                          //                     '나의 지갑',
-                          //                     style: TextStyle(
-                          //                       fontWeight: FontWeight.bold,
-                          //                       fontSize: 18,
-                          //                     ),
-                          //                   ),
-                          //                 ),
-                          //                 Spacer(),
-                          //                 Container(
-                          //                   child: Icon(
-                          //                     Icons.attach_money,
-                          //                     size: 25,
-                          //                   ),
-                          //                 ),
-                          //                 Container(
-                          //                   width: 10,
-                          //                 ),
-                          //                 Container(
-                          //                   child: Text(
-                          //                     '10,000',
-                          //                     style: TextStyle(
-                          //                       fontWeight: FontWeight.bold,
-                          //                       fontSize: 20,
-                          //                     ),
-                          //                   ),
-                          //                 ),
-                          //                 Container(
-                          //                   width: 21,
-                          //                 ),
-                          //                 Container(
-                          //                   child: Icon(Icons.chevron_right),
-                          //                 ),
-                          //                 const SizedBox(width: 25),
-                          //               ],
-                          //             ),
-                          //           ),
-                          //           onTap: () {
-                          //             ScaffoldMessenger.of(context).showSnackBar(
-                          //               SnackBar(
-                          //                 content: Text('나의 지갑'),
-                          //                 duration: Duration(seconds: 3), //올라와있는 시간
-                          //               ),
-                          //             );
-                          //           }),
-                          //       const Divider(
-                          //         height: 1,
-                          //         color: Colors.black,
-                          //       ),
-                          //       Container(
-                          //         decoration: BoxDecoration(
-                          //           borderRadius: BorderRadius.vertical(
-                          //             bottom: Radius.circular(30),
-                          //           ),
-                          //         ),
-                          //         child: Row(
-                          //           mainAxisAlignment: MainAxisAlignment.center,
-                          //           crossAxisAlignment: CrossAxisAlignment.center,
-                          //           children: [
-                          //             InkWell(
-                          //               child: Container(
-                          //                 decoration: BoxDecoration(
-                          //                   //color: Colors.green,
-                          //                   borderRadius: BorderRadius.only(
-                          //                     bottomLeft: Radius.circular(8),
-                          //                   ),
-                          //                 ),
-                          //                 width: MediaQuery.of(context).size.width*0.43,
-                          //                 height: 52,
-                          //                 child: Row(
-                          //                   mainAxisAlignment: MainAxisAlignment.center,
-                          //                   crossAxisAlignment: CrossAxisAlignment.center,
-                          //                   children: [
-                          //                     Icon(Icons.remove),
-                          //                     SizedBox(
-                          //                       width: 17,
-                          //                     ),
-                          //                     Text('인출하기'),
-                          //                   ],
-                          //                 ),
-                          //               ),
-                          //               onTap: () {
-                          //                 ScaffoldMessenger.of(context).showSnackBar(
-                          //                   SnackBar(
-                          //                     content: Text('인출이 완료되었습니다!'),
-                          //                     duration: Duration(seconds: 3), //올라와있는 시간
-                          //                   ),
-                          //                 );
-                          //               },
-                          //             ),
-                          //             Container(
-                          //               width: 0.25,
-                          //               height: 28,
-                          //               decoration: BoxDecoration(
-                          //                 border: Border.all(width: 0.25),
-                          //               ),
-                          //             ),
-                          //             InkWell(
-                          //               child: Container(
-                          //                 decoration: BoxDecoration(
-                          //                   //color: Colors.blue,
-                          //                   borderRadius: BorderRadius.only(
-                          //                     bottomRight: Radius.circular(8),
-                          //                   ),
-                          //                 ),
-                          //                 width: MediaQuery.of(context).size.width*0.43,
-                          //                 height: 52,
-                          //                 child: Row(
-                          //                   mainAxisAlignment: MainAxisAlignment.center,
-                          //                   crossAxisAlignment: CrossAxisAlignment.center,
-                          //                   children: [
-                          //                     Icon(Icons.favorite_border),
-                          //                     SizedBox(
-                          //                       width: 14.5,
-                          //                     ),
-                          //                     Text('기부하기'),
-                          //                   ],
-                          //                 ),
-                          //               ),
-                          //               onTap: () {
-                          //                 ScaffoldMessenger.of(context).showSnackBar(
-                          //                   SnackBar(
-                          //                     content: Text('기부가 완료되었습니다!'),
-                          //                     duration: Duration(seconds: 3), //올라와있는 시간
-                          //                   ),
-                          //                 );
-                          //               },
-                          //             ),
-                          //           ],
-                          //         ),
-                          //       ),
-                          //     ],
-                          //   ),
-                          // ),
                           Container(
                             height: 130,
                             child: Card(
@@ -643,6 +491,12 @@ class _MyPageState extends State<MyPage> with TickerProviderStateMixin {
                         "APPLE", "100,000", 1),
                     productCard(
                         Icons.phone_android, "갤럭시 S10", "SAMSUNG", "50,000", 0),
+                    // for(int i = 0 ; i < _productList.length ; i++)
+                    //   productCard(
+                    //       Icons.phone_android, _productList[i].name, _productList[i].productName, "${Random().nextInt(20)}", i % 3),
+
+
+
                   ],
                 ),
               ),

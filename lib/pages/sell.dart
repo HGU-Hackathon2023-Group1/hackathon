@@ -26,7 +26,7 @@ class _SellState extends State<Sell> {
   Widget buildCategory(String _title, String _url, int state, String people) {
     return Container(
       height: 220,
-      width: MediaQuery.of(context).size.width * 0.43,
+      width: MediaQuery.of(context).size.width * 0.41,
       margin: EdgeInsets.all(8),
       decoration: BoxDecoration(
         border: Border.all(
@@ -39,24 +39,27 @@ class _SellState extends State<Sell> {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Image.network("https://i.ibb.co/QcVn97y/2021-12-16-1-33-11.png"),
+          ClipRRect(borderRadius: const BorderRadius.only(topLeft: Radius.circular(8.0), topRight: Radius.circular(8.0)), child: Image.network("https://i.ibb.co/QcVn97y/2021-12-16-1-33-11.png", )),
           const SizedBox(
             height: 10,
           ),
           Container(
-            padding: const EdgeInsets.all(10),
+            padding:  EdgeInsets.all(10),
             child: Column(
               children: [
-                Text(
-                  _title,
-                  style: TextStyle(
-                    color: _textColor,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w700,
+                Container(
+                  height: 40,
+                  child: Text(
+                    _title,
+                    style: TextStyle(
+                      color: _textColor,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                    ),
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  overflow: TextOverflow.fade,
                 ),
                 const SizedBox(
                   height: 12,
@@ -66,7 +69,7 @@ class _SellState extends State<Sell> {
                   child: LinearProgressIndicator(
                     value: 0.7,
                     valueColor:
-                        AlwaysStoppedAnimation<Color>(Color(0xff00ff00)),
+                        AlwaysStoppedAnimation<Color>(Color(0xFF3D5B74)),
                     backgroundColor: Color(0xffD6D6D6),
                   ),
                 ),
@@ -137,13 +140,17 @@ class _SellState extends State<Sell> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
+              margin: EdgeInsets.zero,
+              padding: EdgeInsets.zero,
               height: 260,
-              width: MediaQuery.of(context).size.width,
+              // width: MediaQuery.of(context).size.width,
               child: Stack(
                 children: [
                   Positioned.fill(
-                      bottom: 60,
+                      bottom: 80,
                       child: Image(
+                        fit: BoxFit.fill,
+                        // width: MediaQuery.of(context).size.width,
                         image: AssetImage(
                           backImg,
                         ),
@@ -319,15 +326,15 @@ class _SellState extends State<Sell> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text("발자국 나누기"),
-                      Text("더보기"),
+                      Text("발자국 나누기", style: TextStyle(color: _textColor, fontSize: 16, fontWeight: FontWeight.w700),),
+                      Text("더보기", style: TextStyle(color: _textColor, fontSize: 12, fontWeight: FontWeight.w500),),
                     ],
                   ),
                   Row(
                     children: <Widget>[
                       buildCategory("전자제품 소각자 노동자들의 건강을 보호해주세요", "-", 60, "3,993,500"),
                       buildCategory(
-                          "전자폐기물 더미에서 일하는 아이들에게 교육을 선물해...", "-", 60, "1,916,200"),
+                          "전자폐기물 더미에서 일하는 아이들에게 교육을 선물해 주세요", "-", 60, "1,916,200"),
                     ],
                   ),
                 ],

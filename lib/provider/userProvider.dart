@@ -12,7 +12,17 @@ class UserProvider extends ChangeNotifier{
 
   }
 
+  int idx = 0;
+
+  int getIdx() => idx;
+  void setIdx(int _idx){
+    idx = _idx;
+    notifyListeners();
+  }
+
   CollectionReference users = FirebaseFirestore.instance.collection('users');
+
+  Future<String> getUid() async => await FirebaseAuth.instance.currentUser!.uid;
 
   Future<void> addUser(User user) async{
     await users.doc(user.uid).set(<String, dynamic>{
